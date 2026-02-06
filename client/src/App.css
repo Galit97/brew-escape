@@ -3,6 +3,9 @@
   padding: 2rem;
   max-width: 800px;
   margin: 0 auto;
+  min-height: 100vh;
+  width: 100%;
+  background: linear-gradient(180deg, #2d1f14 0%, #4a3525 50%, #3d2a1e 100%);
 }
 
 h1 {
@@ -26,13 +29,147 @@ h1 {
   border: 1px solid rgba(100, 108, 255, 0.3);
 }
 
-/* Coffee aesthetic home – only the button */
+/* Coffee aesthetic home – no scroll, brown text, characters above button */
 .home-coffee {
-  min-height: 80vh;
+  min-height: 100vh;
+  height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: linear-gradient(180deg, #2d1f14 0%, #4a3525 50%, #3d2a1e 100%);
+}
+
+/* Floating balloons */
+.home-balloons {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.balloon {
+  position: absolute;
+  width: 32px;
+  height: 40px;
+  /* צורת ביצה – רחב למעלה, צר למטה כמו בלון */
+  border-radius: 50% 50% 48% 52% / 55% 55% 45% 45%;
+  animation: float-balloon 6s ease-in-out infinite;
+  background: transparent;
+  border: 2px solid #fff;
+  box-sizing: border-box;
+}
+
+/* חטט – הקשר בתחתית הבלון (עיגול קטן) */
+.balloon::before {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 8px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: transparent;
+  box-sizing: border-box;
+}
+
+/* חוט קצר מתחת לחטט */
+.balloon::after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  width: 1px;
+  height: 14px;
+  background: rgba(255,255,255,0.6);
+  transform: translateX(-50%);
+}
+
+.balloon-1 { left: 8%; top: 15%; animation-delay: 0s; }
+.balloon-2 { left: 18%; top: 60%; animation-delay: -1.5s; }
+.balloon-3 { left: 75%; top: 25%; animation-delay: -3s; }
+.balloon-4 { left: 85%; top: 55%; animation-delay: -4.5s; }
+.balloon-5 { left: 5%; top: 45%; animation-delay: -2s; }
+.balloon-6 { left: 88%; top: 12%; animation-delay: -5s; }
+
+@keyframes float-balloon {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-12px) rotate(2deg); }
+}
+
+.home-finger-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  order: 1;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.home-finger {
+  width: min(200px, 50vw);
+  height: auto;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.home-finger-wrap .btn-start-game {
+  margin-top: 0;
+}
+
+.home-birthday-title {
+  font-size: clamp(1.25rem, 4vw, 2rem);
+  font-weight: 700;
+  color: #ffffff;
+  background: none;
+  -webkit-background-clip: unset;
+  -webkit-text-fill-color: #ffffff;
+  background-clip: unset;
+  text-align: center;
+  margin: 0;
+  line-height: 1.3;
+  order: 2;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+}
+
+.home-signature {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  color: #6f4e37;
+  font-style: italic;
+  margin: 0;
+  order: 3;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.home-characters {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(180deg, #2d1f14 0%, #4a3525 50%, #3d2a1e 100%);
+  gap: 0.75rem;
+  order: 4;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.home-char-img {
+  width: min(72px, 18vw);
+  height: auto;
+  object-fit: contain;
 }
 
 .btn-start-game {
