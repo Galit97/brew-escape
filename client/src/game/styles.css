@@ -1,0 +1,574 @@
+/* Barista Rush: Birthday Edition - Warm café palette, rounded UI */
+
+:root {
+  --bg: #f5e6d3;
+  --surface: #fff8f0;
+  --card: #ffffff;
+  --accent: #c4a77d;
+  --accent-dark: #8b7355;
+  --text: #3d2c1e;
+  --text-muted: #6b5344;
+  --success: #5a9a5a;
+  --danger: #c45c5c;
+  --shadow: rgba(61, 44, 30, 0.15);
+  --radius: 16px;
+  --radius-sm: 10px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow: hidden;
+  cursor: url('assets/images/finger.png') 12 12, pointer;
+}
+
+button {
+  cursor: url('assets/images/finger.png') 12 12, pointer;
+  font-family: inherit;
+}
+
+/* Screens */
+.screen {
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.screen.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#playing-screen.active {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0;
+}
+
+/* ----- MENU ----- */
+#menu-screen {
+  background: linear-gradient(160deg, #e8d5c4 0%, #f5e6d3 50%, #e8d5c4 100%);
+}
+
+.menu-card {
+  background: var(--card);
+  padding: 2.5rem 3rem;
+  border-radius: var(--radius);
+  box-shadow: 0 12px 40px var(--shadow);
+  text-align: center;
+  max-width: 420px;
+}
+
+.menu-card h1 {
+  font-size: 2rem;
+  color: var(--text);
+  margin-bottom: 0.25rem;
+}
+
+.birthday-tagline {
+  font-size: 1.1rem;
+  color: var(--accent-dark);
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.menu-sub {
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+
+.difficulty-select {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.difficulty-select label {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.difficulty-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.difficulty-buttons button {
+  flex: 1;
+  padding: 0.6rem 1rem;
+  border: 2px solid var(--accent);
+  background: var(--surface);
+  color: var(--text);
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  transition: all 0.2s;
+}
+
+.difficulty-buttons button:hover {
+  background: var(--accent);
+  color: white;
+}
+
+.difficulty-buttons button.selected {
+  background: var(--accent-dark);
+  color: white;
+  border-color: var(--accent-dark);
+}
+
+.btn-primary {
+  padding: 0.9rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background: var(--accent-dark);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 4px 12px var(--shadow);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px var(--shadow);
+}
+
+/* ----- PLAYING: Top bar ----- */
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--card);
+  box-shadow: 0 2px 12px var(--shadow);
+  flex-shrink: 0;
+}
+
+.top-bar .stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.top-bar .stat span:last-child {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.day-progress span:last-child {
+  font-size: 0.95rem;
+}
+
+/* ----- Game area layout ----- */
+.game-area {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 220px 1fr 240px;
+  gap: 1rem;
+  padding: 1rem;
+  min-height: 0;
+}
+
+/* Left: queue + current client */
+.left-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.queue-label,
+.panel-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.queue {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.queue-slot {
+  height: 48px;
+  background: var(--surface);
+  border-radius: var(--radius-sm);
+  border: 2px dashed var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.queue-slot.filled {
+  border-style: solid;
+  border-color: var(--accent-dark);
+  background: var(--card);
+  color: var(--text);
+}
+
+.current-client-card {
+  background: var(--card);
+  padding: 1rem;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 16px var(--shadow);
+  flex: 1;
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.client-mood {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.client-order-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.client-order-name {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.patience-bar-wrap {
+  height: 8px;
+  background: var(--surface);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: auto;
+}
+
+.patience-bar {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, var(--success), #7bc47b);
+  border-radius: 4px;
+  transition: width 0.3s ease, background 0.3s;
+}
+
+.patience-bar.warning {
+  background: #e8b84a;
+}
+
+.patience-bar.danger {
+  background: var(--danger);
+}
+
+.patience-text {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* Center: desk */
+.desk-area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+
+.desk {
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 4/3;
+  background: linear-gradient(180deg, #a08060 0%, #8b7355 100%);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 24px var(--shadow), inset 0 2px 4px rgba(255,255,255,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 4px solid var(--accent-dark);
+}
+
+.cup-zone {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cup-placeholder {
+  font-size: 4rem;
+  opacity: 0.9;
+  transition: transform 0.2s;
+}
+
+.cup-placeholder.ready {
+  transform: scale(1.1);
+}
+
+/* Right: action buttons */
+.right-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.action-btn {
+  padding: 0.65rem 1rem;
+  background: var(--card);
+  border: 2px solid var(--accent);
+  color: var(--text);
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.action-btn:hover {
+  background: var(--accent);
+  color: white;
+  transform: translateX(4px);
+}
+
+.action-btn.serve-btn {
+  background: var(--success);
+  border-color: #4a8a4a;
+  color: white;
+  margin-top: auto;
+  font-weight: 700;
+}
+
+.action-btn.serve-btn:hover {
+  background: #4a8a4a;
+  transform: translateX(4px);
+}
+
+.action-btn.serve-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Order card (bottom-right area) */
+.order-card-wrap {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  max-width: 280px;
+}
+
+.order-card {
+  background: var(--card);
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius);
+  box-shadow: 0 6px 20px var(--shadow);
+}
+
+.order-card-title {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.35rem;
+}
+
+.order-drink-name {
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.order-checklist {
+  list-style: none;
+}
+
+.order-checklist li {
+  padding: 0.25rem 0;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.order-checklist li::before {
+  content: '○';
+  color: var(--text-muted);
+}
+
+.order-checklist li.done {
+  color: var(--success);
+}
+
+.order-checklist li.done::before {
+  content: '✓';
+  color: var(--success);
+}
+
+.hint {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  min-height: 1.2em;
+}
+
+/* Shake overlay (wrong step) */
+.shake-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.2);
+  pointer-events: none;
+  z-index: 100;
+}
+
+.shake-overlay.hidden {
+  display: none;
+}
+
+.wrong-hint {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--danger);
+  background: var(--card);
+  padding: 1rem 1.5rem;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 4px 16px var(--shadow);
+  animation: pop 0.4s ease;
+}
+
+@keyframes pop {
+  0% { transform: scale(0.8); opacity: 0; }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.shake-overlay.shake {
+  animation: shake 0.5s ease;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-10px); }
+  40% { transform: translateX(10px); }
+  60% { transform: translateX(-8px); }
+  80% { transform: translateX(8px); }
+}
+
+/* ----- END screen ----- */
+#end-screen {
+  background: linear-gradient(160deg, #e8d5c4 0%, #f5e6d3 100%);
+}
+
+.end-card {
+  background: var(--card);
+  padding: 2.5rem 3rem;
+  border-radius: var(--radius);
+  box-shadow: 0 12px 40px var(--shadow);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.end-card h1 {
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.birthday-message {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent-dark);
+  margin-bottom: 1.5rem;
+}
+
+.end-stats {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.end-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.end-stat-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.end-stat span:last-child {
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+/* Confetti */
+.confetti {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.confetti-piece {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  animation: confetti-fall 2.5s ease-out forwards;
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-20px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(400px) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* Success / Fail flash (optional) */
+.success-flash {
+  animation: successFlash 0.6s ease;
+}
+
+@keyframes successFlash {
+  0% { filter: brightness(1); }
+  50% { filter: brightness(1.3); }
+  100% { filter: brightness(1); }
+}

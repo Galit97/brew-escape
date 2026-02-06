@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Barista Rush: Birthday Edition</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- MENU -->
+    <div id="menu-screen" class="screen active">
+      <div class="menu-card">
+        <h1>☕ Barista Rush</h1>
+        <p class="birthday-tagline">Birthday Edition</p>
+        <p class="menu-sub">Serve drinks before time runs out!</p>
+        <div class="difficulty-select">
+          <label>Difficulty:</label>
+          <div class="difficulty-buttons">
+            <button type="button" data-difficulty="easy">Easy</button>
+            <button type="button" data-difficulty="normal" class="selected">Normal</button>
+            <button type="button" data-difficulty="hard">Hard</button>
+          </div>
+        </div>
+        <button type="button" id="btn-start" class="btn-primary">Start Day</button>
+      </div>
+    </div>
+
+    <!-- PLAYING -->
+    <div id="playing-screen" class="screen">
+      <!-- Top bar -->
+      <header class="top-bar">
+        <div class="stat"><span class="stat-label">Score</span><span id="score">0</span></div>
+        <div class="stat"><span class="stat-label">Tips</span><span id="tips">0</span></div>
+        <div class="stat hearts"><span class="stat-label">Reputation</span><span id="hearts">❤️❤️❤️</span></div>
+        <div class="stat day-progress"><span class="stat-label">Day</span><span id="day-progress">0 / 10</span></div>
+      </header>
+
+      <main class="game-area">
+        <!-- Left: client queue + current client -->
+        <aside class="left-panel">
+          <div class="queue-label">Queue</div>
+          <div id="queue" class="queue">
+            <div class="queue-slot empty"></div>
+            <div class="queue-slot empty"></div>
+            <div class="queue-slot empty"></div>
+          </div>
+          <div id="current-client" class="current-client-card">
+            <div class="client-mood" id="client-mood">🙂</div>
+            <div class="client-order-label">Wants:</div>
+            <div class="client-order-name" id="client-order-name">—</div>
+            <div class="patience-bar-wrap">
+              <div class="patience-bar" id="patience-bar"></div>
+            </div>
+            <div class="patience-text" id="patience-text">—</div>
+          </div>
+        </aside>
+
+        <!-- Center: desk / counter -->
+        <section class="desk-area">
+          <div class="desk">
+            <div class="cup-zone" id="cup-zone">
+              <div class="cup-placeholder" id="cup-placeholder">🫗</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Right: coffee machine panel -->
+        <aside class="right-panel">
+          <div class="panel-label">Actions</div>
+          <div class="action-buttons" id="action-buttons">
+            <button type="button" class="action-btn" data-action="Place Cup">Place Cup</button>
+            <button type="button" class="action-btn" data-action="Grind Beans">Grind Beans</button>
+            <button type="button" class="action-btn" data-action="Tamp">Tamp</button>
+            <button type="button" class="action-btn" data-action="Pull Shot">Pull Shot</button>
+            <button type="button" class="action-btn" data-action="Steam Milk">Steam Milk</button>
+            <button type="button" class="action-btn" data-action="Add Hot Water">Add Hot Water</button>
+            <button type="button" class="action-btn" data-action="Add Milk">Add Milk</button>
+            <button type="button" class="action-btn" data-action="Add Foam">Add Foam</button>
+            <button type="button" class="action-btn serve-btn" data-action="Serve">Serve</button>
+          </div>
+        </aside>
+      </main>
+
+      <!-- Order card (bottom/right area) -->
+      <div class="order-card-wrap">
+        <div class="order-card" id="order-card">
+          <div class="order-card-title">Current Order</div>
+          <div class="order-drink-name" id="order-drink-name">—</div>
+          <ul class="order-checklist" id="order-checklist"></ul>
+          <div class="hint" id="hint"></div>
+        </div>
+      </div>
+
+      <!-- Shake overlay for wrong step -->
+      <div id="shake-overlay" class="shake-overlay hidden">
+        <span class="wrong-hint">Not yet!</span>
+      </div>
+    </div>
+
+    <!-- END (End of Day) -->
+    <div id="end-screen" class="screen">
+      <div class="end-card" id="end-card">
+        <h1>End of Day</h1>
+        <p class="birthday-message">Happy 30th! 🎂</p>
+        <div class="end-stats">
+          <div class="end-stat"><span class="end-stat-label">Score</span><span id="end-score">0</span></div>
+          <div class="end-stat"><span class="end-stat-label">Tips</span><span id="end-tips">0</span></div>
+          <div class="end-stat"><span class="end-stat-label">Reputation</span><span id="end-hearts">—</span></div>
+        </div>
+        <div id="confetti" class="confetti"></div>
+        <button type="button" id="btn-play-again" class="btn-primary">Play Again</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>

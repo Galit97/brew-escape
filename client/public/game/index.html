@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Barista Rush: Birthday Edition</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- MENU -->
+    <div id="menu-screen" class="screen active">
+      <div class="menu-card menu-coffee">
+        <img src="assets/images/finger.png" alt="אצבע" class="finger-character" />
+        <h1 class="game-title">☕ Barista Rush</h1>
+        <p class="birthday-tagline">Birthday Edition</p>
+        <div class="difficulty-row">
+          <button type="button" data-difficulty="easy">קל</button>
+          <button type="button" data-difficulty="normal" class="selected">בינוני</button>
+          <button type="button" data-difficulty="hard">קשה</button>
+        </div>
+        <button type="button" id="btn-start" class="btn-primary btn-start-day">התחל</button>
+      </div>
+    </div>
+
+    <!-- PLAYING -->
+    <div id="playing-screen" class="screen">
+      <header class="top-bar">
+        <button type="button" id="btn-pause" class="btn-pause" title="השהה / המשך">⏸ השהה</button>
+        <div class="stat timer-stat">
+          <span class="stat-label">שעון</span>
+          <span id="timer-display" class="timer-display">0:00</span>
+        </div>
+        <div class="stat"><span class="stat-label">ניקוד</span><span id="score">0</span></div>
+        <div class="stat"><span class="stat-label">טיפים</span><span id="tips">0</span></div>
+        <div class="stat hearts"><span class="stat-label">מוניטין</span><span id="hearts">❤️❤️❤️</span></div>
+        <div class="stat day-progress"><span class="stat-label">יום</span><span id="day-progress">0 / 10</span></div>
+      </header>
+      <div id="pause-overlay" class="pause-overlay hidden">
+        <span class="pause-text">משחק מושהה</span>
+        <span class="pause-hint">לחץ השהה להמשך</span>
+      </div>
+
+      <main class="game-area">
+        <aside class="left-panel">
+          <div class="queue-label">תור</div>
+          <div id="queue" class="queue">
+            <div class="queue-slot empty"></div>
+            <div class="queue-slot empty"></div>
+            <div class="queue-slot empty"></div>
+          </div>
+          <div id="current-client" class="current-client-card">
+            <div class="timer-box">
+              <span class="timer-label">זמן נותר</span>
+              <span id="timer-display-left" class="timer-value">0:00</span>
+            </div>
+            <div class="patience-bar-wrap">
+              <div class="patience-bar" id="patience-bar"></div>
+            </div>
+            <div class="patience-text" id="patience-text">—</div>
+          </div>
+        </aside>
+
+        <section class="desk-area">
+          <!-- פינגר במרכז – הבריסטה -->
+          <div class="desk">
+            <div class="barista-zone" id="barista-zone">
+              <img src="assets/images/finger.png" alt="פינגר" class="barista-character" id="barista-character" />
+            </div>
+          </div>
+          <!-- הדמות שמגיעה אליו ומבקשת – עם ענן מלמעלה -->
+          <div class="customer-at-counter" id="customer-at-counter">
+            <div class="client-cloud" id="client-cloud">
+              <span id="client-cloud-drink">—</span>
+            </div>
+            <img id="current-client-avatar" class="client-avatar" src="" alt="" />
+          </div>
+          <!-- כמה תהליכים – ואינדיקציית וי על בוצע -->
+          <div class="step-progress-wrap" id="step-progress-wrap">
+            <span class="step-progress-label">תהליכים:</span>
+            <span id="step-progress-text">0 מתוך 0</span>
+            <div class="step-indicators" id="step-indicators"></div>
+          </div>
+        </section>
+
+        <aside class="right-panel">
+          <div class="panel-label">פעולות</div>
+          <div class="action-buttons" id="action-buttons">
+            <button type="button" class="action-btn" data-action="הנחת כוס">הנחת כוס</button>
+            <button type="button" class="action-btn" data-action="טחינת פולים">טחינת פולים</button>
+            <button type="button" class="action-btn" data-action="דחיסה">דחיסה</button>
+            <button type="button" class="action-btn" data-action="חליטת אספרסו">חליטת אספרסו</button>
+            <button type="button" class="action-btn" data-action="חימום חלב">חימום חלב</button>
+            <button type="button" class="action-btn" data-action="הוספת מים חמים">הוספת מים חמים</button>
+            <button type="button" class="action-btn" data-action="הוספת חלב">הוספת חלב</button>
+            <button type="button" class="action-btn" data-action="הוספת קצף">הוספת קצף</button>
+            <button type="button" class="action-btn" data-action="הוספת שוקו">הוספת שוקו</button>
+            <button type="button" class="action-btn" data-action="הוספת חלב חם">הוספת חלב חם</button>
+            <button type="button" class="action-btn" data-action="הוספת קרח">הוספת קרח</button>
+            <button type="button" class="action-btn" data-action="פתיחת בקבוק">פתיחת בקבוק</button>
+            <button type="button" class="action-btn" data-action="עירסול יין">עירסול יין</button>
+            <button type="button" class="action-btn" data-action="לשים בדיקנטר">לשים בדיקנטר</button>
+            <button type="button" class="action-btn" data-action="מזיגת יין">מזיגת יין</button>
+            <button type="button" class="action-btn" data-action="חליטת קולד ברו">חליטת קולד ברו</button>
+            <button type="button" class="action-btn serve-btn" data-action="הגשה">הגשה</button>
+          </div>
+        </aside>
+      </main>
+
+      <!-- שלבים לא מוצגים – השחקן צריך לדעת -->
+      <div class="hint-only" id="hint-only"></div>
+
+      <div id="shake-overlay" class="shake-overlay hidden">
+        <span class="wrong-hint">עדיין לא!</span>
+      </div>
+    </div>
+
+    <!-- END -->
+    <div id="end-screen" class="screen">
+      <div class="end-card" id="end-card">
+        <h1>סוף היום</h1>
+        <p class="birthday-message">Happy 30th! 🎂</p>
+        <div class="end-stats">
+          <div class="end-stat"><span class="end-stat-label">ניקוד</span><span id="end-score">0</span></div>
+          <div class="end-stat"><span class="end-stat-label">טיפים</span><span id="end-tips">0</span></div>
+          <div class="end-stat"><span class="end-stat-label">מוניטין</span><span id="end-hearts">—</span></div>
+        </div>
+        <div id="confetti" class="confetti"></div>
+        <button type="button" id="btn-play-again" class="btn-primary">שחק שוב</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>

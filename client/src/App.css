@@ -1,0 +1,56 @@
+.app {
+  text-align: center;
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #646cff, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  color: #888;
+  margin-bottom: 2rem;
+}
+
+.status {
+  padding: 1rem 1.5rem;
+  background: rgba(100, 108, 255, 0.1);
+  border-radius: 8px;
+  border: 1px solid rgba(100, 108, 255, 0.3);
+}
+
+/* Coffee aesthetic home – only the button */
+.home-coffee {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #2d1f14 0%, #4a3525 50%, #3d2a1e 100%);
+}
+
+.btn-start-game {
+  display: inline-block;
+  padding: 1.25rem 3rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #f5e6d3;
+  background: linear-gradient(180deg, #6f4e37 0%, #5c3d2e 50%, #4a3024 100%);
+  border: 3px solid #8b6f47;
+  border-radius: 16px;
+  text-decoration: none;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+.btn-start-game:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.15);
+  background: linear-gradient(180deg, #7d5a42 0%, #6b4532 50%, #5c3d2e 100%);
+}
