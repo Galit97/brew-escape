@@ -26,9 +26,9 @@
   const CUSTOMER_AVATARS = ['galit', 'konus', 'bonus'];
 
   const DIFFICULTY = {
-    easy: { patienceMax: 35, drainRate: 1 },
-    normal: { patienceMax: 25, drainRate: 1 },
-    hard: { patienceMax: 20, drainRate: 1.4 },
+    easy: { patienceMax: 120, drainRate: 1 },   /* קל = 2 דקות */
+    normal: { patienceMax: 60, drainRate: 1 },
+    hard: { patienceMax: 40, drainRate: 1.4 },
   };
 
   const SCORE_PER_ORDER = 50;
@@ -326,7 +326,7 @@
     currentClient = queue.shift();
     currentSteps = DRINKS[currentClient.drinkType].slice();
     currentStepIndex = 0;
-    shuffleActionButtons();
+    /* כפתורי פעולות נשארים בסדר קבוע (לפי סדר הפעולות) – בלי ערבוב */
     updateCurrentClientDisplay();
     updatePatienceBar();
     updateServeButton();
