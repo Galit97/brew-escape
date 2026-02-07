@@ -845,3 +845,338 @@ button {
   50% { filter: brightness(1.3); }
   100% { filter: brightness(1); }
 }
+
+/* ========== Responsive: tablet ========== */
+@media (max-width: 900px) {
+  .game-area {
+    grid-template-columns: 160px 1fr 200px;
+    gap: 0.75rem;
+    padding: 0.75rem;
+  }
+
+  .top-bar {
+    gap: 1rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .top-bar .stat span:last-child {
+    font-size: 1rem;
+  }
+
+  .timer-stat .timer-display {
+    font-size: 1.1rem;
+    min-width: 2.5em;
+  }
+
+  .action-btn {
+    padding: 0.55rem 0.85rem;
+    font-size: 0.85rem;
+  }
+
+  .customer-at-counter .client-avatar {
+    width: 64px;
+    height: 64px;
+  }
+
+  .customer-at-counter .client-cloud {
+    font-size: 0.9rem;
+    padding: 0.35rem 0.75rem;
+  }
+
+  .barista-zone {
+    width: 100px;
+    height: 120px;
+  }
+
+  .queue-slot {
+    height: 48px;
+  }
+
+  .current-client-card {
+    min-height: 120px;
+    padding: 0.75rem;
+  }
+
+  .menu-card {
+    padding: 1.75rem 2rem;
+    max-width: 90vw;
+  }
+
+  .menu-card .game-title {
+    font-size: 1.6rem;
+  }
+
+  .end-card {
+    padding: 1.75rem 2rem;
+    max-width: 90vw;
+  }
+}
+
+/* ========== Responsive: mobile ========== */
+@media (max-width: 640px) {
+  html, body {
+    cursor: pointer;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  .top-bar {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .top-bar .stat {
+    min-width: auto;
+  }
+
+  .stat-label {
+    font-size: 0.65rem;
+  }
+
+  .top-bar .stat span:last-child {
+    font-size: 0.9rem;
+  }
+
+  .timer-stat .timer-display {
+    font-size: 1rem;
+    padding: 0.2rem 0.4rem;
+    min-width: 2.2em;
+  }
+
+  .btn-pause {
+    padding: 0.35rem 0.6rem;
+    font-size: 0.8rem;
+  }
+
+  .hearts span:last-child {
+    font-size: 0.85rem;
+  }
+
+  .game-area {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto 1fr auto;
+    grid-template-areas:
+      "queue"
+      "center"
+      "actions";
+    gap: 0.5rem;
+    padding: 0.5rem;
+    min-height: 0;
+  }
+
+  .left-panel {
+    grid-area: queue;
+    flex-direction: row;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: auto;
+  }
+
+  .queue {
+    flex-direction: row;
+    gap: 0.4rem;
+  }
+
+  .queue-slot {
+    width: 52px;
+    height: 52px;
+    min-width: 52px;
+    flex-shrink: 0;
+  }
+
+  .queue-label {
+    display: none;
+  }
+
+  .desk-area {
+    grid-area: center;
+    min-height: 0;
+    justify-content: flex-start;
+  }
+
+  .desk {
+    max-width: 100%;
+    min-height: 120px;
+    aspect-ratio: 4/2.5;
+  }
+
+  .barista-zone {
+    width: 80px;
+    height: 100px;
+  }
+
+  .customer-at-counter .client-avatar {
+    width: 56px;
+    height: 56px;
+  }
+
+  .customer-at-counter .client-cloud {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.6rem;
+  }
+
+  .current-client-card {
+    min-height: 100px;
+    padding: 0.5rem;
+  }
+
+  .step-progress-wrap {
+    padding: 0.4rem 0.5rem;
+  }
+
+  .step-progress-label,
+  #step-progress-text {
+    font-size: 0.8rem;
+  }
+
+  .step-dot {
+    width: 20px;
+    height: 20px;
+    font-size: 0.75rem;
+  }
+
+  .right-panel {
+    grid-area: actions;
+    max-height: none;
+  }
+
+  .panel-label {
+    font-size: 0.75rem;
+  }
+
+  .action-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.4rem;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    max-height: 220px;
+    padding: 0.25rem;
+  }
+
+  .action-btn {
+    padding: 0.6rem 0.5rem;
+    font-size: 0.8rem;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .action-btn.serve-btn {
+    grid-column: 1 / -1;
+    min-height: 48px;
+  }
+
+  .action-btn:hover {
+    transform: none;
+  }
+
+  .action-btn:active {
+    transform: scale(0.98);
+  }
+
+  .menu-card {
+    padding: 1.25rem 1.5rem;
+    margin: 0.5rem;
+  }
+
+  .menu-card .game-title {
+    font-size: 1.4rem;
+  }
+
+  .birthday-tagline {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  .difficulty-row {
+    gap: 0.35rem;
+    margin-bottom: 1rem;
+  }
+
+  .difficulty-row button {
+    padding: 0.45rem 0.75rem;
+    font-size: 0.8rem;
+  }
+
+  .btn-start-day {
+    padding: 0.85rem 2rem;
+    font-size: 1.1rem;
+  }
+
+  .finger-character {
+    width: 60px;
+  }
+
+  .end-card {
+    padding: 1.25rem 1.5rem;
+    margin: 0.5rem;
+  }
+
+  .end-card h1 {
+    font-size: 1.4rem;
+  }
+
+  .birthday-message {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+
+  .end-stats {
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .end-stat-label {
+    font-size: 0.7rem;
+  }
+
+  .end-stat span:last-child {
+    font-size: 1.1rem;
+  }
+
+  .btn-primary {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  .pause-text {
+    font-size: 1.35rem;
+  }
+
+  .pause-hint {
+    font-size: 0.9rem;
+  }
+
+  .wrong-hint {
+    font-size: 1.2rem;
+    padding: 0.75rem 1rem;
+  }
+
+  .hint-only {
+    bottom: 0.5rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Very small phones */
+@media (max-width: 380px) {
+  .action-buttons {
+    grid-template-columns: 1fr;
+    max-height: 200px;
+  }
+
+  .action-btn.serve-btn {
+    grid-column: 1;
+  }
+
+  .top-bar .stat:nth-child(n+4) .stat-label {
+    display: none;
+  }
+}
